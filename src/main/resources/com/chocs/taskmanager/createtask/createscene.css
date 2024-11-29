@@ -1,0 +1,45 @@
+* {
+    -fx-dark-gray-color: #464646;
+}
+
+.root {
+    -fx-background-color: "black";
+}
+
+.label {
+    -fx-text-fill: "white";
+}
+
+.menu-button {
+	-fx-background-color: -fx-dark-gray-color;
+}
+
+.menu-button:hover {
+    -fx-background-color: #7a7a7a;
+}
+
+.menu-button:showing {
+    -fx-base: transparent;
+}
+
+.menu-item {
+    -fx-background-color: -fx-dark-gray-color;
+    -fx-text-fill: "white";
+}
+
+.menu-item:focused {
+    -fx-background-color: #949494;
+}
+
+.text-field {
+    -fx-text-fill: "white";
+    -fx-background-color: -fx-dark-gray-color;
+}
+
+.button {
+    -fx-background-color: -fx-dark-gray-color;
+}
+
+.button:hover {
+    -fx-background-color: #7a7a7a;
+}

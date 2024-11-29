@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" hgap="5.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="500.0" vgap="5.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chocs.taskmanager.createtask.CreateController">
+  <columnConstraints>
+    <ColumnConstraints halignment="RIGHT" minWidth="190.0" prefWidth="100.0" />
+    <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="200.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+      <Label text="Type" GridPane.rowIndex="0">
+         <font>            <Font size="32.0" />                                         </font>
+         <GridPane.margin> <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /> </GridPane.margin>
+      </Label>
+      <Label text="Subject" GridPane.rowIndex="1">
+      	 <font>            <Font size="32.0" />                                         </font>
+         <GridPane.margin> <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /> </GridPane.margin>
+      </Label>
+      <Label text="Description" GridPane.rowIndex="2">
+      	 <font>            <Font size="32.0" />                                         </font>
+         <GridPane.margin> <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /> </GridPane.margin>
+      </Label>
+      <Label text="Date" GridPane.rowIndex="3">
+      	 <font>            <Font size="32.0" />                                         </font>
+         <GridPane.margin> <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" /> </GridPane.margin>
+      </Label>
+      <Button mnemonicParsing="false" onAction="#onBackButtonPressed" prefHeight="56.0" prefWidth="160.0" text="Back" textFill="WHITE" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <MenuButton fx:id="typeMenu" mnemonicParsing="false" prefHeight="50.0" prefWidth="265.0" text="Select type..." GridPane.columnIndex="1">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#onTypeMenuChanged" text="Test" />
+          <MenuItem mnemonicParsing="false" onAction="#onTypeMenuChanged" text="Homework" />
+        </items>
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </MenuButton>
+      <MenuButton fx:id="subjectMenu" mnemonicParsing="false" prefHeight="50.0" prefWidth="265.0" text="Select subject..." GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Software Engineering" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="English" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Physical Education" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Chemistry" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Art" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Mathematics" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Geography" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Databases" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Biology" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Physics" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Philosophy" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="OOP" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Portuguese" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="History" />
+          <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Sociology" />
+        </items>
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </MenuButton>
+      <TextField fx:id="textField" onAction="#onDescriptionChanged" prefHeight="46.0" prefWidth="265.0" text="Insert description..." GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+         </GridPane.margin>
+      </TextField>
+      <DatePicker onAction="#onDatePickerChanged" prefHeight="40.0" prefWidth="260.0" stylesheets="@components/datepicker.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+      </DatePicker>
+      <Button mnemonicParsing="false" onAction="#onSubmitButtonPressed" prefHeight="60.0" prefWidth="250.0" text="Submit" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4">
+         <GridPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+   <padding>
+      <Insets bottom="5.0" top="5.0" />
+   </padding>
+</GridPane>

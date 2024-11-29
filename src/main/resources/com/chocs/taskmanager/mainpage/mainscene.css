@@ -1,0 +1,17 @@
+.root {
+    -fx-background-color: "black";
+}
+
+.scroll-pane {
+    -fx-base: black;
+}
+
+.button {
+    -fx-background-color: #464646;
+    -fx-font-family: "Arial";
+    -fx-text-fill: "white";
+}
+
+.button:hover {
+    -fx-background-color: #7a7a7a;
+}
