@@ -5,10 +5,7 @@ import com.chocs.taskmanager.model.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -66,7 +63,13 @@ public class CreateController {
     }
 
     @FXML
-    protected void onSubmitButtonPressed(ActionEvent event) {
+    protected void onSubmitButtonPressed(ActionEvent event) throws IOException {
+        if(task.getDescription() == null || task.getSubject() == null || task.getSubject().isEmpty() ||
+           task.getType() == null        || task.getType().isEmpty()  || task.getDate() == null) {
+            ((Button) event.getSource()).setText("Fill all values!");
+        }
 
+        task = new Task();
+        onBackButtonPressed(event);
     }
 }

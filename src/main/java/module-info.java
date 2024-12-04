@@ -1,6 +1,8 @@
 module com.chocs.taskmanager {
     requires javafx.controls;
     requires javafx.fxml;
+    requires jdk.jsobject;
+    requires com.google.gson;
 
 
     opens com.chocs.taskmanager.mainpage to javafx.fxml;
