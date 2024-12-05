@@ -1,15 +1,23 @@
 package com.chocs.taskmanager.createtask;
 
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.time.LocalDate;
+
 import com.chocs.taskmanager.mainpage.MainPage;
 import com.chocs.taskmanager.model.Task;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.time.LocalDate;
 
 public class CreateController {
     Task task = new Task();
@@ -68,7 +76,15 @@ public class CreateController {
            task.getType() == null        || task.getType().isEmpty()  || task.getDate() == null) {
             ((Button) event.getSource()).setText("Fill all values!");
         }
+        
+        try {
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/task_manager");
+	        conn.createStatement().executeQuery("INSERT INTO Tasks values (");
+        } catch (SQLException e) {
+			e.printStackTrace();
+		}
 
+        
         task = new Task();
         onBackButtonPressed(event);
     }
