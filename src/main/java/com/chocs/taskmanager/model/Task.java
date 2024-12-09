@@ -4,25 +4,44 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    private String type;
-    private String subject;
+    private int id;
+    private TaskTypes type;
+    private Subject subject;
     private String description;
     private int daysLeft;
     private LocalDate date;
 
-    public String getType() {
+    public Task() {}
+
+    public Task(int id, TaskTypes type, Subject subject, String description, LocalDate date) {
+        this.id = id;
+        this.type = type;
+        this.subject = subject;
+        this.description = description;
+        this.date = date;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public TaskTypes getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TaskTypes type) {
         this.type = type;
     }
 
-    public String getSubject() {
+    public Subject getSubject() {
         return subject;
     }
 
-    public void setSubject(String subject) {
+    public void setSubject(Subject subject) {
         this.subject = subject;
     }
 

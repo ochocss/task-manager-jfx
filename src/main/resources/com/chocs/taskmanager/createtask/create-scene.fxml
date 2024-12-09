@@ -46,6 +46,7 @@
         <items>
           <MenuItem mnemonicParsing="false" onAction="#onTypeMenuChanged" text="Test" />
           <MenuItem mnemonicParsing="false" onAction="#onTypeMenuChanged" text="Homework" />
+            <MenuItem mnemonicParsing="false" onAction="#onTypeMenuChanged" text="Others" />
         </items>
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -71,6 +72,7 @@
           <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Portuguese" />
           <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="History" />
           <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Sociology" />
+            <MenuItem mnemonicParsing="false" onAction="#onSubjectMenuChanged" text="Other" />
         </items>
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

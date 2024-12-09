@@ -1,6 +1,7 @@
 package com.chocs.taskmanager.model;
 
 public class Subject {
+	private int id;
 	private Teacher teacher;
 	private String name;
 	
@@ -11,7 +12,13 @@ public class Subject {
 		this.teacher = teacher;
 		this.name = name;
 	}
-	
+
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Teacher getTeacher() {
 		return teacher;
 	}
