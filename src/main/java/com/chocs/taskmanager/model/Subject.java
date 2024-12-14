@@ -2,14 +2,14 @@ package com.chocs.taskmanager.model;
 
 public class Subject {
 	private int id;
-	private Teacher teacher;
+	private int idTeacher;
 	private String name;
 	
 	public Subject() {};
 	
-	public Subject(Teacher teacher, String name) {
-		super();
-		this.teacher = teacher;
+	public Subject(int id, int idTeacher, String name) {
+		this.id = id;
+		this.idTeacher = idTeacher;
 		this.name = name;
 	}
 
@@ -19,11 +19,11 @@ public class Subject {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Teacher getTeacher() {
-		return teacher;
+	public int getIdTeacher() {
+		return idTeacher;
 	}
-	public void setTeacher(Teacher teacher) {
-		this.teacher = teacher;
+	public void setIdTeacher(int idTeacher) {
+		this.idTeacher = idTeacher;
 	}
 	public String getName() {
 		return name;
@@ -34,6 +34,6 @@ public class Subject {
 
 	@Override
 	public String toString() {
-		return "Subject [teacher=" + teacher + ", name=" + name + "]";
+		return "Subject [idTeacher=" + id + ", " + idTeacher + ", name=" + name + "]";
 	}
 }

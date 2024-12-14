@@ -5,18 +5,17 @@ import java.time.format.DateTimeFormatter;
 
 public class Task {
     private int id;
-    private TaskTypes type;
-    private Subject subject;
+    private int typeId;
+    private int subjectId;
     private String description;
-    private int daysLeft;
     private LocalDate date;
 
     public Task() {}
 
-    public Task(int id, TaskTypes type, Subject subject, String description, LocalDate date) {
+    public Task(int id, int type, int subjectId, String description, LocalDate date) {
         this.id = id;
-        this.type = type;
-        this.subject = subject;
+        this.typeId = type;
+        this.subjectId = subjectId;
         this.description = description;
         this.date = date;
     }
@@ -29,20 +28,20 @@ public class Task {
         this.id = id;
     }
 
-    public TaskTypes getType() {
-        return type;
+    public int getTypeId() {
+        return typeId;
     }
 
-    public void setType(TaskTypes type) {
-        this.type = type;
+    public void setTypeId(int type) {
+        this.typeId = type;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public int getSubjectId() {
+        return subjectId;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 
     public String getDescription() {
@@ -53,16 +52,8 @@ public class Task {
         this.description = description;
     }
 
-    public int getDaysLeft() {
-        return daysLeft;
-    }
-
-    public void calcDaysLeft() {
-        daysLeft = date.getDayOfYear() - LocalDate.now().getDayOfYear();
-
-        if (daysLeft < 0) {
-            daysLeft += 365;
-        }
+    public int calcDaysLeft() {
+        return date.getDayOfYear() - LocalDate.now().getDayOfYear();
     }
 
     public LocalDate getDate() {
@@ -75,8 +66,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return type + " [" + subject + ", " + description + ", " +
+        return "Task [" + id + ", "  + subjectId + ", " + description + ", " +
                 date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
-                ", " + daysLeft + " days left]";
+                ", " + calcDaysLeft() + " days left]";
     }
 }

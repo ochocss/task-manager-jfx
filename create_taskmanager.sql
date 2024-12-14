@@ -1,7 +1,6 @@
 drop schema if exists task_manager;
 
 create schema task_manager;
-
 use task_manager;
 
 create table Teachers (
@@ -32,10 +31,11 @@ create table Tasks (
 );
 
 insert into TaskTypes values
-	(1, "Test"), (2, "Homework"), (3, "Others");
+	(1, 'Test'), (2, 'Homework'), (3, 'Others');
 
 -- Insert models
-insert into Teachers values (1, "Romaldo");
-insert into Subjects values (1, 1, "OOP");
+insert into Teachers values (1, 'Romaldo');
+insert into Subjects values (1, 1, 'OOP');
 
-SELECT * FROM Subjects WHERE Nome = "OOP";
+create user if not exists 'java'@'localhost' identified by 'password';
+grant all on task_manager.* to 'java'@'localhost';

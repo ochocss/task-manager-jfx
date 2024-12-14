@@ -1,15 +1,10 @@
 package com.chocs.taskmanager.createtask;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
-import java.util.Objects;
 
 import com.chocs.taskmanager.mainpage.MainPage;
-import com.chocs.taskmanager.model.Subject;
 import com.chocs.taskmanager.model.Task;
 
 import com.chocs.taskmanager.model.TaskTypes;
@@ -24,8 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class CreateController {
-    Task task = new Task();
-    Connection conn;
+    private Task task = new Task();
+    private Connection conn;
 
     @FXML
     MenuButton typeMenu, subjectMenu;
@@ -34,12 +29,15 @@ public class CreateController {
     TextField textField;
 
     @FXML
-    protected void onTypeMenuChanged(ActionEvent event) {
+    protected void onTypeMenuChanged(ActionEvent event) throws SQLException {
         String type = ((MenuItem) event.getSource()).getText();
-        switch (type) {
-            case "Test": task.setType(TaskTypes.TEST);
-            case "Homework": task.setType(TaskTypes.HOMEWORK);
-            default: task.setType(TaskTypes.OTHERS);
+
+        ResultSet result = query("SELECT * FROM TaskTypes WHERE Nome = '" + type + "';");
+
+        if(result != null && result.next()) {
+            task.setTypeId(result.getInt("ID_type"));
+        } else {
+            System.out.println("Type not found.");
         }
 
         typeMenu.setText(type);
@@ -48,7 +46,14 @@ public class CreateController {
     @FXML
     protected void onSubjectMenuChanged(ActionEvent event) throws SQLException {
         String subject = ((MenuItem) event.getSource()).getText();
-        task.setSubject(Objects.requireNonNull(query("SELECT * FROM Subjects WHERE Nome = " + subject)).getObject(1, Subject.class));
+
+        ResultSet result = query("SELECT * FROM Subjects WHERE Nome = '" + subject + "';");
+
+        if(result != null && result.next()) {
+            task.setSubjectId(result.getInt("ID_subject"));
+        } else {
+            System.out.println("Subject not found.");
+        }
 
         subjectMenu.setText(subject);
     }
@@ -81,21 +86,28 @@ public class CreateController {
 
     @FXML
     protected void onSubmitButtonPressed(ActionEvent event) throws IOException, SQLException {
-        if(task.getDescription() == null || task.getSubject() == null ||
-           task.getType() == null        || task.getDate() == null) {
+        if(task.getDescription() == null || task.getSubjectId() == 0 ||
+           task.getTypeId() == 0        || task.getDate() == null) {
             ((Button) event.getSource()).setText("Fill all values first!");
+            return;
         }
-        
-        query("INSERT INTO Tasks values (" + task.getId() + ", " + task.getType() + ", " + task.getSubject().getId() + ", '"
-                + task.getDescription() + "', '" + task.getDate() + "');");
-        
+
+        System.out.println(task);
+        conn.createStatement().executeUpdate("INSERT INTO Tasks (ID_type, ID_subject, Descript, TaskDate) values (" + task.getTypeId() + ", "
+                                                 + task.getSubjectId() + ", '" + task.getDescription() + "', '" + task.getDate() + "');");
+
         task = new Task();
         onBackButtonPressed(event);
     }
 
     private ResultSet query(String sql) throws SQLException {
         if(conn == null) {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/task_manager");
+            try {
+                Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/task_manager", "java", "password");
         }
 
         return conn.createStatement().executeQuery(sql);
