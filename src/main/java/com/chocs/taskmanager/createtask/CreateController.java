@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
+import com.chocs.taskmanager.database.DatabaseUtils;
 import com.chocs.taskmanager.mainpage.MainPage;
 import com.chocs.taskmanager.model.Task;
 
-import com.chocs.taskmanager.model.TaskTypes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -22,17 +22,18 @@ public class CreateController {
     private Task task = new Task();
     private Connection conn;
 
-    @FXML
-    MenuButton typeMenu, subjectMenu;
+    @FXML private MenuButton typeMenu, subjectMenu;
+    @FXML private TextField textField;
 
-    @FXML
-    TextField textField;
+    public CreateController() {
+        conn = DatabaseUtils.connect();
+    }
 
     @FXML
     protected void onTypeMenuChanged(ActionEvent event) throws SQLException {
         String type = ((MenuItem) event.getSource()).getText();
 
-        ResultSet result = query("SELECT * FROM TaskTypes WHERE Nome = '" + type + "';");
+        ResultSet result = conn.createStatement().executeQuery("SELECT * FROM TaskTypes WHERE Nome = '" + type + "';");
 
         if(result != null && result.next()) {
             task.setTypeId(result.getInt("ID_type"));
@@ -45,9 +46,9 @@ public class CreateController {
 
     @FXML
     protected void onSubjectMenuChanged(ActionEvent event) throws SQLException {
-        String subject = ((MenuItem) event.getSource()).getText();
+        String subjectName = ((MenuItem) event.getSource()).getText();
 
-        ResultSet result = query("SELECT * FROM Subjects WHERE Nome = '" + subject + "';");
+        ResultSet result = conn.createStatement().executeQuery("SELECT * FROM Subjects WHERE Name = '" + subjectName + "';");
 
         if(result != null && result.next()) {
             task.setSubjectId(result.getInt("ID_subject"));
@@ -55,7 +56,7 @@ public class CreateController {
             System.out.println("Subject not found.");
         }
 
-        subjectMenu.setText(subject);
+        subjectMenu.setText(subjectName);
     }
 
     @FXML
@@ -98,18 +99,5 @@ public class CreateController {
 
         task = new Task();
         onBackButtonPressed(event);
-    }
-
-    private ResultSet query(String sql) throws SQLException {
-        if(conn == null) {
-            try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
-            }
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/task_manager", "java", "password");
-        }
-
-        return conn.createStatement().executeQuery(sql);
     }
 }
