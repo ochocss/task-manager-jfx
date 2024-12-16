@@ -48,7 +48,7 @@ public class CreateController {
     protected void onSubjectMenuChanged(ActionEvent event) throws SQLException {
         String subjectName = ((MenuItem) event.getSource()).getText();
 
-        ResultSet result = conn.createStatement().executeQuery("SELECT * FROM Subjects WHERE Name = '" + subjectName + "';");
+        ResultSet result = conn.createStatement().executeQuery("SELECT * FROM Subjects WHERE Nome = '" + subjectName + "';");
 
         if(result != null && result.next()) {
             task.setSubjectId(result.getInt("ID_subject"));
