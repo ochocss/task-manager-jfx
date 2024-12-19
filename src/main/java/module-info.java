@@ -10,4 +10,6 @@ module com.chocs.taskmanager {
 
     opens com.chocs.taskmanager.createtask to javafx.fxml;
     exports com.chocs.taskmanager.createtask;
+    exports com.chocs.taskmanager.taskpane;
+    opens com.chocs.taskmanager.taskpane to javafx.fxml;
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="200.0" maxWidth="296.0" minHeight="70.0" minWidth="200.0" prefHeight="80.0" prefWidth="230.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chocs.taskmanager.taskpane.TaskController">
+    <GridPane alignment="CENTER" hgap="10.0" layoutY="-5.0" prefHeight="90.0" prefWidth="230.0" vgap="5.0">
+        <columnConstraints>
+            <ColumnConstraints maxWidth="89.0" minWidth="10.0" prefWidth="68.0"/>
+            <ColumnConstraints maxWidth="137.0" minWidth="10.0" prefWidth="122.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="43.0" vgrow="ALWAYS"/>
+            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="17.0" valignment="CENTER" vgrow="NEVER"/>
+        </rowConstraints>
+        <Label fx:id="id" text="Id" GridPane.halignment="LEFT"/>
+        <Label fx:id="typeId" text="type" GridPane.halignment="LEFT" GridPane.rowIndex="1"/>
+        <Label fx:id="subjectId" text="subjectId" GridPane.halignment="RIGHT"/>
+        <Label fx:id="description" text="description" GridPane.columnIndex="1" GridPane.halignment="CENTER"/>
+        <Label fx:id="date" text="date" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Label fx:id="daysLeft" layoutX="95.0" layoutY="61.0" text="days left" GridPane.columnIndex="1"
+               GridPane.halignment="RIGHT" GridPane.rowIndex="1"/>
+    </GridPane>
+</Pane>

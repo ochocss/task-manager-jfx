@@ -35,7 +35,7 @@ public class CreateController {
 
         ResultSet result = conn.createStatement().executeQuery("SELECT * FROM TaskTypes WHERE Nome = '" + type + "';");
 
-        if(result != null && result.next()) {
+        if(result.next()) {
             task.setTypeId(result.getInt("ID_type"));
         } else {
             System.out.println("Type not found.");
@@ -50,7 +50,7 @@ public class CreateController {
 
         ResultSet result = conn.createStatement().executeQuery("SELECT * FROM Subjects WHERE Nome = '" + subjectName + "';");
 
-        if(result != null && result.next()) {
+        if(result.next()) {
             task.setSubjectId(result.getInt("ID_subject"));
         } else {
             System.out.println("Subject not found.");

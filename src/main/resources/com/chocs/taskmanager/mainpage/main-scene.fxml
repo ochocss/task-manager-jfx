@@ -10,7 +10,9 @@
     </padding>
    <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
       <content>
-         <VBox alignment="CENTER" prefHeight="112.0" prefWidth="370.0" />
+         <VBox fx:id="taskBox" alignment="CENTER" prefHeight="112.0" prefWidth="370.0">
+         	<children />
+         </VBox>
       </content>
    </ScrollPane>
     <Button onAction="#onCreateButtonClick" prefHeight="35.0" prefWidth="222.0" text="Create new task" />
