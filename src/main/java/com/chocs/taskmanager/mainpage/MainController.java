@@ -3,12 +3,9 @@ package com.chocs.taskmanager.mainpage;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Objects;
 
 import com.chocs.taskmanager.createtask.CreateController;
-import com.chocs.taskmanager.database.DatabaseUtils;
 import com.chocs.taskmanager.model.Task;
 
 import com.chocs.taskmanager.taskpane.TaskController;
@@ -16,29 +13,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainController {
 	@FXML
 	private VBox taskBox;
-	
-	public MainController() throws SQLException, IOException {
-		ResultSet r = Objects.requireNonNull(DatabaseUtils.connect()).createStatement().executeQuery("SELECT * FROM Tasks");
-		
-		while(r.next()) {
-			Task task = new Task(r.getInt("ID_task"), 
-					r.getInt("ID_type"),
-					r.getInt("ID_subject"),
-					r.getString("Descript"),
-					LocalDate.ofInstant(r.getDate("TaskDate").toInstant(), ZoneId.systemDefault()));
-			Pane taskPane = FXMLLoader.load(Objects.requireNonNull(TaskController.class.getResource("task.fxml")));
-			
-			taskBox.getChildren().add(taskPane);
-		}
+
+
+	@FXML
+	public void initialize() {
+		conn = connect();
+		read();
 	}
 	
     @FXML
@@ -53,4 +39,32 @@ public class MainController {
         stage.show();
         stage.centerOnScreen();
     }
+
+	public void reload() {
+		taskBox.getChildren().clear();
+		read();
+	}
+
+	private void read() {
+		try {
+			ResultSet r = Objects.requireNonNull(connect()).createStatement().executeQuery("SELECT * FROM Tasks");
+
+			while(r.next()) {
+				Task task = new Task(r.getInt("ID_task"),
+						r.getInt("ID_type"),
+						r.getInt("ID_subject"),
+						r.getString("Descript"),
+						r.getDate("TaskDate").toLocalDate());
+
+				FXMLLoader fxmlLoader = new FXMLLoader(TaskController.class.getResource("task.fxml"));
+				TaskController taskController = new TaskController(task, conn, this);
+				fxmlLoader.setController(taskController);
+
+				taskBox.getChildren().add(fxmlLoader.load());
+			}
+		} catch (SQLException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
