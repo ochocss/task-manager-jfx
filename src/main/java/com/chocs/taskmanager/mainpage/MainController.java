@@ -1,6 +1,8 @@
 package com.chocs.taskmanager.mainpage;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -20,6 +22,7 @@ public class MainController {
 	@FXML
 	private VBox taskBox;
 
+	private Connection conn;
 
 	@FXML
 	public void initialize() {
@@ -29,15 +32,7 @@ public class MainController {
 	
     @FXML
     protected void onCreateButtonClick(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(CreateController.class.getResource("create-scene.fxml")));
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add(Objects.requireNonNull(CreateController.class.getResource("createscene.css")).toExternalForm());
-        
-        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle("Create new task");
-        stage.setScene(scene);
-        stage.show();
-        stage.centerOnScreen();
+        CreateController.create((Stage)((Node)event.getSource()).getScene().getWindow(), conn);
     }
 
 	public void reload() {
@@ -67,4 +62,13 @@ public class MainController {
 		}
 	}
 
+	private Connection connect() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			return DriverManager.getConnection("jdbc:mysql://localhost:3306/task_manager", "java", "password");
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

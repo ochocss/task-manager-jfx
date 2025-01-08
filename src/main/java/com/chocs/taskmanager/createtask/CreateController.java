@@ -25,8 +25,8 @@ public class CreateController {
     @FXML private MenuButton typeMenu, subjectMenu;
     @FXML private TextField textField;
 
-    public CreateController() {
-        conn = DatabaseUtils.connect();
+    public void setConnection(Connection conn) {
+        this.conn = conn;
     }
 
     @FXML
