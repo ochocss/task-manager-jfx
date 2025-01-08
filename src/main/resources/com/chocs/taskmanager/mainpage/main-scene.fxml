@@ -4,16 +4,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" maxHeight="700.0" maxWidth="1600.0" minHeight="400.0" minWidth="400.0" spacing="15.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chocs.taskmanager.mainpage.MainController">
+<VBox alignment="CENTER" maxHeight="700.0" maxWidth="1600.0" minHeight="400.0" minWidth="400.0" spacing="15.0" stylesheets="@mainscene.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chocs.taskmanager.mainpage.MainController">
     <padding>
         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
     </padding>
-   <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-      <content>
-         <VBox fx:id="taskBox" alignment="CENTER" prefHeight="112.0" prefWidth="370.0">
-         	<children />
-         </VBox>
-      </content>
-   </ScrollPane>
+    <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+        <VBox fx:id="taskBox" alignment="CENTER" prefHeight="100.0" prefWidth="370.0" VBox.vgrow="ALWAYS">
+        </VBox>
+    </ScrollPane>
     <Button onAction="#onCreateButtonClick" prefHeight="35.0" prefWidth="222.0" text="Create new task" />
 </VBox>
