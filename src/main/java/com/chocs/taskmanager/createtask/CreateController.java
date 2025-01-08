@@ -3,14 +3,16 @@ package com.chocs.taskmanager.createtask;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
-import com.chocs.taskmanager.database.DatabaseUtils;
 import com.chocs.taskmanager.mainpage.MainPage;
 import com.chocs.taskmanager.model.Task;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuButton;
@@ -24,6 +26,18 @@ public class CreateController {
 
     @FXML private MenuButton typeMenu, subjectMenu;
     @FXML private TextField textField;
+
+    public static void create(Stage stage, Connection conn) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(CreateController.class.getResource("create-scene.fxml")));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        ((CreateController) fxmlLoader.getController()).setConnection(conn);
+
+        stage.setTitle("Create new task");
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
+    }
 
     public void setConnection(Connection conn) {
         this.conn = conn;
@@ -93,7 +107,6 @@ public class CreateController {
             return;
         }
 
-        System.out.println(task);
         conn.createStatement().executeUpdate("INSERT INTO Tasks (ID_type, ID_subject, Descript, TaskDate) values (" + task.getTypeId() + ", "
                                                  + task.getSubjectId() + ", '" + task.getDescription() + "', '" + task.getDate() + "');");
 
