@@ -82,7 +82,7 @@ public class CreateController {
 
     @FXML
     protected void onBackButtonPressed(ActionEvent event) throws IOException {
-        MainPage.createScene((Stage)((Node)event.getSource()).getScene().getWindow());
+        MainPage.createMainScene((Stage)((Node)event.getSource()).getScene().getWindow());
     }
 
     @FXML
