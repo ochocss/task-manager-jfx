@@ -34,8 +34,12 @@ insert into TaskTypes values
 	(1, 'Test'), (2, 'Homework'), (3, 'Others');
 
 -- Insert models
-insert into Teachers values (1, 'Romaldo');
-insert into Subjects values (1, 1, 'OOP');
+insert into Teachers values (1, 'Generic Teacher');
+insert into Subjects (ID_teacher, Nome) values
+                                            (1, 'Art'), (1, 'Biology'), (1, 'Chemistry'), (1, 'Databases'), (1, 'English'),
+                                            (1, 'Geography'), (1, 'History'), (1, 'Mathematics'), (1, 'OOP'), (1, 'Philosophy'),
+                                            (1, 'Physical Education'), (1, 'Physics'), (1, 'Portuguese'), (1, 'Sociology'),
+                                            (1, 'Software Engineering');
 
 create user if not exists 'java'@'localhost' identified by 'password';
 grant all on task_manager.* to 'java'@'localhost';
