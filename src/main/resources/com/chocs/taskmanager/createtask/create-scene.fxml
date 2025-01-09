@@ -81,12 +81,12 @@
             <Font size="20.0" />
          </font>
       </MenuButton>
-      <TextField fx:id="textField" onAction="#onDescriptionChanged" prefHeight="46.0" prefWidth="265.0" text="Insert description..." GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="descriptionTextfield" onAction="#onDescriptionChanged" prefHeight="46.0" prefWidth="265.0" text="Insert description..." GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
          </GridPane.margin>
       </TextField>
-      <DatePicker onAction="#onDatePickerChanged" prefHeight="40.0" prefWidth="260.0" stylesheets="@../components/datepicker.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <DatePicker fx:id="datePicker" onAction="#onDatePickerChanged" prefHeight="40.0" prefWidth="260.0" stylesheets="@../components/datepicker.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </GridPane.margin>

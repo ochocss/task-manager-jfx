@@ -7,16 +7,17 @@
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="89.0" minWidth="10.0" prefWidth="68.0" />
         <ColumnConstraints hgrow="ALWAYS" maxWidth="137.0" minWidth="10.0" prefWidth="122.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="50.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="137.0" minWidth="10.0" prefWidth="50.0" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="40.0" valignment="TOP" vgrow="ALWAYS" />
         <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="20.0" valignment="BOTTOM" vgrow="SOMETIMES" />
     </rowConstraints>
-    <Label fx:id="typeId" text="type" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-    <Label fx:id="subjectId" text="subjectId" GridPane.halignment="CENTER" />
+    <Label fx:id="type" text="type" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+    <Label fx:id="subject" text="subject" GridPane.halignment="CENTER" />
     <Label fx:id="description" text="description" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
     <Label fx:id="date" text="date" GridPane.columnIndex="1" GridPane.rowIndex="1" />
     <Label fx:id="daysLeft" layoutX="95.0" layoutY="61.0" text="days left" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
-   <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="deleteButton"/>
+    <Button mnemonicParsing="false" text="Delete" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="deleteButton"/>
+    <Button mnemonicParsing="false" text="Update" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" fx:id="updateButton"/>
 </GridPane>

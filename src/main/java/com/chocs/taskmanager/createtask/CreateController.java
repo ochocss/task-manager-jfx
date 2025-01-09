@@ -23,9 +23,12 @@ import javafx.stage.Stage;
 public class CreateController {
     private Task task = new Task();
     private Connection conn;
+    private int id;
+    private boolean isUpdating;
 
     @FXML private MenuButton typeMenu, subjectMenu;
-    @FXML private TextField textField;
+    @FXML private TextField descriptionTextfield;
+    @FXML private DatePicker datePicker;
 
     public static void create(Stage stage, Connection conn) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(CreateController.class.getResource("create-scene.fxml")));
@@ -39,7 +42,30 @@ public class CreateController {
         stage.centerOnScreen();
     }
 
-    public void setConnection(Connection conn) {
+    public static void create(Stage stage, Connection conn, int id, String type, String subject, String description, LocalDate date) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(CreateController.class.getResource("create-scene.fxml")));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        ((CreateController) fxmlLoader.getController()).setConnection(conn);
+        ((CreateController) fxmlLoader.getController()).setTask(id, type, subject, description, date);
+
+        stage.setTitle("Create new task");
+        stage.setScene(scene);
+        stage.show();
+        stage.centerOnScreen();
+    }
+
+    public void setTask(int id, String type, String subject, String description, LocalDate date) {
+        this.id = id;
+        typeMenu.setText(type);
+        subjectMenu.setText(subject);
+        descriptionTextfield.setText(description);
+        datePicker.setValue(date);
+
+        isUpdating = true;
+    }
+
+    private void setConnection(Connection conn) {
         this.conn = conn;
     }
 
@@ -60,9 +86,9 @@ public class CreateController {
 
     @FXML
     protected void onSubjectMenuChanged(ActionEvent event) throws SQLException {
-        String subjectName = ((MenuItem) event.getSource()).getText();
+        String subject = ((MenuItem) event.getSource()).getText();
 
-        ResultSet result = conn.createStatement().executeQuery("SELECT * FROM Subjects WHERE Nome = '" + subjectName + "';");
+        ResultSet result = conn.createStatement().executeQuery("SELECT * FROM Subjects WHERE Nome = '" + subject + "';");
 
         if(result.next()) {
             task.setSubjectId(result.getInt("ID_subject"));
@@ -70,7 +96,7 @@ public class CreateController {
             System.out.println("Subject not found.");
         }
 
-        subjectMenu.setText(subjectName);
+        subjectMenu.setText(subject);
     }
 
     @FXML
@@ -79,7 +105,7 @@ public class CreateController {
 
         if(description.length() > 63) {
             description = description.substring(0, 63);
-            textField.setText(description);
+            descriptionTextfield.setText(description);
         }
 
         task.setDescription(description);
@@ -106,11 +132,18 @@ public class CreateController {
             ((Button) event.getSource()).setText("Fill all values first!");
             return;
         }
+        if(isUpdating) {
+            System.out.println("UPDATE Tasks SET ID_type = " + task.getTypeId() + ", ID_subject = " + task.getSubjectId()
+                    + ", Descript = " + task.getDescription() + ", TaskDate = '" + task.getDate() +
+                    "' WHERE ID_task = " + id + ";");
+            conn.createStatement().executeUpdate("UPDATE Tasks SET ID_type = " + task.getTypeId() + ", ID_subject = " + task.getSubjectId()
+                                                     + ", Descript = '" + task.getDescription() + "', TaskDate = '" + task.getDate() +
+                                                     "' WHERE ID_task = " + id + ";"); // que porra ???
+        } else {
+            conn.createStatement().executeUpdate("INSERT INTO Tasks (ID_type, ID_subject, Descript, TaskDate) values (" + task.getTypeId() + ", "
+                                                     + task.getSubjectId() + ", '" + task.getDescription() + "', '" + task.getDate() + "');");
+        }
 
-        conn.createStatement().executeUpdate("INSERT INTO Tasks (ID_type, ID_subject, Descript, TaskDate) values (" + task.getTypeId() + ", "
-                                                 + task.getSubjectId() + ", '" + task.getDescription() + "', '" + task.getDate() + "');");
-
-        task = new Task();
         onBackButtonPressed(event);
     }
 }
