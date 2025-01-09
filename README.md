@@ -1,3 +1,9 @@
 # task-manager-jfx
  
-A simple CRUD made with MySQL, Java, JDBC and JavaFX.
+a simple CRUD made with MySQL, Java, JDBC and JavaFX.
+
+# running
+
+```
+mvn javafx:run
+```
