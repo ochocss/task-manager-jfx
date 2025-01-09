@@ -24,7 +24,7 @@ create table Tasks (
 	ID_task int not null auto_increment primary key,
     ID_type int not null,
     ID_subject int not null,
-    Descript varchar (50) not null,
+    Descript varchar (64) not null,
     TaskDate date not null,
     foreign key (ID_type) references TaskTypes (ID_type),
     foreign key (ID_subject) references Subjects (ID_subject)
