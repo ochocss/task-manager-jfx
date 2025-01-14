@@ -13,11 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 public class CreateController {
@@ -29,6 +25,7 @@ public class CreateController {
     @FXML private MenuButton typeMenu, subjectMenu;
     @FXML private TextField descriptionTextfield;
     @FXML private DatePicker datePicker;
+    @FXML private Button submitButton;
 
     public static void create(Stage stage, Connection conn) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Objects.requireNonNull(CreateController.class.getResource("create-scene.fxml")));
@@ -69,10 +66,7 @@ public class CreateController {
         this.conn = conn;
     }
 
-    @FXML
-    protected void onTypeMenuChanged(ActionEvent event) throws SQLException {
-        String type = ((MenuItem) event.getSource()).getText();
-
+    private void setType(String type) throws SQLException {
         ResultSet result = conn.createStatement().executeQuery("SELECT * FROM TaskTypes WHERE Nome = '" + type + "';");
 
         if(result.next()) {
@@ -84,10 +78,7 @@ public class CreateController {
         typeMenu.setText(type);
     }
 
-    @FXML
-    protected void onSubjectMenuChanged(ActionEvent event) throws SQLException {
-        String subject = ((MenuItem) event.getSource()).getText();
-
+    private void setSubject(String subject) throws SQLException {
         ResultSet result = conn.createStatement().executeQuery("SELECT * FROM Subjects WHERE Nome = '" + subject + "';");
 
         if(result.next()) {
@@ -95,7 +86,17 @@ public class CreateController {
         } else {
             System.out.println("Subject not found.");
         }
+    }
 
+    @FXML
+    protected void onTypeMenuChanged(ActionEvent event) {
+        String type = ((MenuItem) event.getSource()).getText();
+        typeMenu.setText(type);
+    }
+
+    @FXML
+    protected void onSubjectMenuChanged(ActionEvent event) throws SQLException {
+        String subject = ((MenuItem) event.getSource()).getText();
         subjectMenu.setText(subject);
     }
 
@@ -107,17 +108,18 @@ public class CreateController {
             description = description.substring(0, 63);
             descriptionTextfield.setText(description);
         }
-
-        task.setDescription(description);
     }
 
     @FXML
     protected void onDatePickerChanged(ActionEvent event) {
         LocalDate date = ((DatePicker) event.getSource()).getValue();
 
-        if (date != null && date.isAfter(LocalDate.now())) {
-            task.setDate(date);
+        if (date == null) {
+            System.out.println("Date is null.");
+            return;
         }
+
+        task.setDate(date);
     }
 
     @FXML
@@ -126,16 +128,41 @@ public class CreateController {
     }
 
     @FXML
+    protected void onMouseExitedButton() {
+        submitButton.setText("Submit");
+    }
+
+    @FXML
     protected void onSubmitButtonPressed(ActionEvent event) throws IOException, SQLException {
-        if(task.getDescription() == null || task.getSubjectId() == 0 ||
-           task.getTypeId() == 0        || task.getDate() == null) {
-            ((Button) event.getSource()).setText("Fill all values first!");
+        String temp = typeMenu.getText();
+        if(temp.equals("Select type...") || temp.isEmpty() || temp.isBlank()) {
+            submitButton.setText("Fill all values first!");
             return;
         }
+        setType(temp);
+
+        temp = subjectMenu.getText();
+        if(temp.equals("Select subject...") || temp.isEmpty() || temp.isBlank()) {
+            submitButton.setText("Fill all values first!");
+            return;
+        }
+        setSubject(temp);
+
+        temp = descriptionTextfield.getText();
+        if(temp.equals("Insert description...") || temp.isEmpty() || temp.isBlank()) {
+            submitButton.setText("Fill all values first!");
+            return;
+        }
+        task.setDescription(temp);
+
+        LocalDate date = datePicker.getValue();
+        if(date == null) {
+            submitButton.setText("Fill all values first!");
+            return;
+        }
+        task.setDate(date);
+
         if(isUpdating) {
-            System.out.println("UPDATE Tasks SET ID_type = " + task.getTypeId() + ", ID_subject = " + task.getSubjectId()
-                    + ", Descript = " + task.getDescription() + ", TaskDate = '" + task.getDate() +
-                    "' WHERE ID_task = " + id + ";");
             conn.createStatement().executeUpdate("UPDATE Tasks SET ID_type = " + task.getTypeId() + ", ID_subject = " + task.getSubjectId()
                                                      + ", Descript = '" + task.getDescription() + "', TaskDate = '" + task.getDate() +
                                                      "' WHERE ID_task = " + id + ";");
