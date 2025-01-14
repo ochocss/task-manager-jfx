@@ -138,7 +138,7 @@ public class CreateController {
                     "' WHERE ID_task = " + id + ";");
             conn.createStatement().executeUpdate("UPDATE Tasks SET ID_type = " + task.getTypeId() + ", ID_subject = " + task.getSubjectId()
                                                      + ", Descript = '" + task.getDescription() + "', TaskDate = '" + task.getDate() +
-                                                     "' WHERE ID_task = " + id + ";"); // que porra ???
+                                                     "' WHERE ID_task = " + id + ";");
         } else {
             conn.createStatement().executeUpdate("INSERT INTO Tasks (ID_type, ID_subject, Descript, TaskDate) values (" + task.getTypeId() + ", "
                                                      + task.getSubjectId() + ", '" + task.getDescription() + "', '" + task.getDate() + "');");
