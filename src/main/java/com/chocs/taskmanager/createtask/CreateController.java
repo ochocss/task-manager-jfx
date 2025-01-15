@@ -89,15 +89,13 @@ public class CreateController {
     }
 
     @FXML
-    protected void onTypeMenuChanged(ActionEvent event) {
-        String type = ((MenuItem) event.getSource()).getText();
-        typeMenu.setText(type);
+    protected void onTypeMenuChanged(ActionEvent event) {;
+        typeMenu.setText(((MenuItem) event.getSource()).getText());
     }
 
     @FXML
     protected void onSubjectMenuChanged(ActionEvent event) throws SQLException {
-        String subject = ((MenuItem) event.getSource()).getText();
-        subjectMenu.setText(subject);
+        subjectMenu.setText(((MenuItem) event.getSource()).getText());
     }
 
     @FXML
