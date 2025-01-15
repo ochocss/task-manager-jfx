@@ -5,12 +5,29 @@
 <?import javafx.scene.layout.*?>
 
 <VBox alignment="CENTER" maxHeight="700.0" maxWidth="1600.0" minHeight="400.0" minWidth="400.0" spacing="15.0" stylesheets="@mainscene.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.chocs.taskmanager.mainpage.MainController">
-    <padding>
-        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-    </padding>
-    <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-        <VBox fx:id="taskBox" alignment="CENTER" prefHeight="100.0" prefWidth="370.0" VBox.vgrow="ALWAYS">
-        </VBox>
-    </ScrollPane>
-    <Button onAction="#onCreateButtonClick" prefHeight="35.0" prefWidth="222.0" text="Create new task" />
+   <padding>
+      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+   </padding>
+   <HBox alignment="CENTER" prefHeight="45.0" prefWidth="370.0" VBox.vgrow="NEVER">
+      <children>
+         <MenuButton fx:id="orderFieldMenu" mnemonicParsing="false" text="Order by days left" HBox.hgrow="ALWAYS">
+            <items>
+               <MenuItem mnemonicParsing="false" onAction="#onOrderFieldSelected" text="Order by type" />
+               <MenuItem mnemonicParsing="false" onAction="#onOrderFieldSelected" text="Order by subject" />
+               <MenuItem mnemonicParsing="false" onAction="#onOrderFieldSelected" text="Order by date" />
+            </items>
+         </MenuButton>
+         <MenuButton fx:id="orderTypeMenu" mnemonicParsing="false" text="Ascending order" HBox.hgrow="ALWAYS">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#onOrderTypeSelected" text="Ascending order" />
+              <MenuItem mnemonicParsing="false" onAction="#onOrderTypeSelected" text="Descending order" />
+            </items>
+         </MenuButton>
+      </children>
+   </HBox>
+   <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+      <VBox fx:id="taskBox" alignment="CENTER" prefHeight="100.0" prefWidth="370.0" spacing="10.0" VBox.vgrow="ALWAYS">
+      </VBox>
+   </ScrollPane>
+   <Button onAction="#onCreateButtonClick" prefHeight="35.0" prefWidth="222.0" text="Create new task" />
 </VBox>
