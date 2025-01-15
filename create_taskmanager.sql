@@ -31,7 +31,7 @@ insert into Subjects (Nome) values
                                 ('Art'), ('Biology'), ('Chemistry'), ('Databases'), ('English'),
                                 ('Geography'), ('History'), ('Mathematics'), ('OOP'), ('Philosophy'),
                                 ('Physical Education'), ('Physics'), ('Portuguese'), ('Sociology'),
-                                ('Software Engineering');
+                                ('Software Engineering'), ('Other');
 
 create user if not exists 'java'@'localhost' identified by 'password';
 grant all on task_manager.* to 'java'@'localhost';
