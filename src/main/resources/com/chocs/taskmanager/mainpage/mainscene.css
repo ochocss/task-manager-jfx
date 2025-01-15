@@ -10,9 +10,33 @@
     -fx-background-color: transparent;
 }
 
+.label {
+    -fx-text-fill: white;
+}
+
+.menu-button {
+    -fx-background-color: #464646;
+}
+
+.menu-button:hover {
+    -fx-background-color: #7a7a7a;
+}
+
+.menu-button:showing {
+    -fx-base: transparent;
+}
+
+.menu-item {
+    -fx-background-color: #464646;
+    -fx-text-fill: "white";
+}
+
+.menu-item:focused {
+    -fx-background-color: #949494;
+}
+
 .button {
     -fx-background-color: #464646;
-    -fx-font-family: "Arial";
     -fx-text-fill: "white";
 }
 

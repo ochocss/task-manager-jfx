@@ -10,7 +10,7 @@ import java.io.IOException;
 public class MainPage extends Application {
     public static void createMainScene(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainPage.class.getResource("main-scene.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        Scene scene = new Scene(fxmlLoader.load());
 
         stage.setTitle("Task Manager");
         stage.setScene(scene);
